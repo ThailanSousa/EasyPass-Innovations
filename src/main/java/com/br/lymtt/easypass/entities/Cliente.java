@@ -1,5 +1,9 @@
-package main.java.com.br.lymtt.easypass.entities;
+package com.br.lymtt.easypass.entities;
 
-public class Cliente {
+
+
+public class Cliente extends Pessoa {
+
+    //herda pessoa
     
 }

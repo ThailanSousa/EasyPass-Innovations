@@ -1,5 +1,5 @@
-package main.java.com.br.lymtt.easypass.entities;
+package com.br.lymtt.easypass.entities;
 
-public class Promotor {
+public class Promotor extends Pessoa {
     
 }
