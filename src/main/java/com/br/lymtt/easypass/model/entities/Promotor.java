@@ -1,4 +1,4 @@
-package com.br.lymtt.easypass.entities;
+package com.br.lymtt.easypass.model.entities;
 
 public class Promotor extends Pessoa {
     
