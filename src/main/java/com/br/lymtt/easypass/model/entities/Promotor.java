@@ -6,9 +6,11 @@ public class Promotor extends Pessoa{
 public Promotor(){
 }
 
-public Promotor (String empresa){
+public Promotor(Long id, String nome, String cpf, String genero, int idade, String empresa) {
+    super(id, nome, cpf, genero, idade);
     this.empresa = empresa;
 }
+
 
 public String getEmpresa() {
     return empresa;
