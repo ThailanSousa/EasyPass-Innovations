@@ -2,23 +2,45 @@ package com.br.lymtt.easypass.model.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+
+    @Entity
+    @Table(schema = "LYMTT", name = "evento")
 
 public class Evento {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Long id;
     private LocalDate data;
     private String local;
     private LocalTime hora;
-    private Cliente cliente;
 
     public Evento() {
     }
 
-    public Evento(LocalDate data, String local, LocalTime hora, Cliente cliente) {
+    public Evento(Long id ,LocalDate data, String local, LocalTime hora) {
+        this.id = id;
         this.data = data;
         this.local = local;
         this.hora = hora;
-        this.cliente = cliente;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public LocalDate getData() {
         return data;
     }
@@ -43,16 +65,9 @@ public class Evento {
         this.hora = hora;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
 
     @Override
     public String toString() {
-        return "Evento [data=" + data + ", local=" + local + ", hora=" + hora + ", cliente=" + cliente + "]";
+        return "Evento [ id= " + id + " data=" + data + ", local=" + local + ", hora=" + hora +" ]";
     }
 }
