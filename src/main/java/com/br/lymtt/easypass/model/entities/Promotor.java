@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
 @Entity
 @Table(schema = "LYMTT", name = "promotor")
 
@@ -15,6 +16,8 @@ public class Promotor extends Pessoa{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
+
+    @Column(name = "empresa")
     private String empresa;
     
 public Promotor(){
