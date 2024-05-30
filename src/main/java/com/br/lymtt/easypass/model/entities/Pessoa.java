@@ -5,7 +5,7 @@ public class Pessoa {
     private Long id;
     private String nome;
     private String cpf;
-    private String genero; //maculino ou feminino
+    private String genero; //masculino ou feminino
     private int idade;
 
     public Pessoa() {
