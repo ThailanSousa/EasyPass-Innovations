@@ -1,5 +1,5 @@
 package com.br.lymtt.easypass.controller;
 
-public class Pessoacontroller {
+public class PromotorController {
     
 }
