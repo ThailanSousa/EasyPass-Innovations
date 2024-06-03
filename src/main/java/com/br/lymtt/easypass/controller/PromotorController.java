@@ -1,12 +1,15 @@
 package com.br.lymtt.easypass.controller;
 
+
+import com.br.lymtt.easypass.entity.Event;
 import com.br.lymtt.easypass.entity.Promoter;
+import com.br.lymtt.easypass.repository.EventRepository;
 import com.br.lymtt.easypass.repository.PromoterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 import java.util.Optional;
 
 @RestController
@@ -16,24 +19,23 @@ public class PromotorController {
     @Autowired
     private PromoterRepository promoterRepository;
 
+    @Autowired
+    private EventRepository eventRepository;
+
     @GetMapping
-    public List<Promoter> getAllPromoters() {
-        return promoterRepository.findAll();
+    public ResponseEntity<?> getAllPromoters() {
+        return ResponseEntity.ok(promoterRepository.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Promoter> getPromoterById(@PathVariable String id) {
         Optional<Promoter> promoter = promoterRepository.findById(id);
-        if (promoter.isPresent()) {
-            return ResponseEntity.ok(promoter.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return promoter.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Promoter createPromoter(@RequestBody Promoter promoter) {
-        return promoterRepository.save(promoter);
+    public ResponseEntity<Promoter> createPromoter(@RequestBody Promoter promoter) {
+        return ResponseEntity.ok(promoterRepository.save(promoter));
     }
 
     @PutMapping("/{id}")
@@ -45,8 +47,7 @@ public class PromotorController {
             promoter.setIdade(promoterDetails.getIdade());
             promoter.setEmail(promoterDetails.getEmail());
             promoter.setCodigoPromotor(promoterDetails.getCodigoPromotor());
-            Promoter updatedPromoter = promoterRepository.save(promoter);
-            return ResponseEntity.ok(updatedPromoter);
+            return ResponseEntity.ok(promoterRepository.save(promoter));
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -58,6 +59,19 @@ public class PromotorController {
         if (promoter.isPresent()) {
             promoterRepository.delete(promoter.get());
             return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/{promoterId}/events")
+    public ResponseEntity<Event> createEvent(@PathVariable String promoterId, @RequestBody Event event) {
+        Optional<Promoter> optionalPromoter = promoterRepository.findById(promoterId);
+        if (optionalPromoter.isPresent()) {
+            Promoter promoter = optionalPromoter.get();
+            promoter.addEvent(event);
+            eventRepository.save(event);
+            return ResponseEntity.ok(event);
         } else {
             return ResponseEntity.notFound().build();
         }
