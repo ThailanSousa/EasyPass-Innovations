@@ -44,6 +44,7 @@ public class ClienteService {
             return null;
         }
     }
+    
     //DELETANDO ESSE CACETE
     public boolean deletar(Long id) {
         if (clienteRepository.existsById(id)) {
