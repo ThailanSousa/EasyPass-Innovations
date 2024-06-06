@@ -1,5 +1,5 @@
 package com.br.lymtt.easypass.model.entities;
-import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(schema = "LYMTT", name = "cliente")
-
+//teste1
 public class Cliente {
 
     @Id
@@ -92,7 +92,8 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente [email=" + getEmail() + ", numeroTelefone=" + getNumeroTelefone() + ", id=" + getId() + ", nome="
+        return "Cliente [email=" + getEmail() + ", numeroTelefone=" + getNumeroTelefone() + ", id=" + getId()
+                + ", nome="
                 + getNome() + ", cpf=" + getCpf() + ", genero=" + getGenero() + ", idade=" + getIdade() + "]";
     }
 
