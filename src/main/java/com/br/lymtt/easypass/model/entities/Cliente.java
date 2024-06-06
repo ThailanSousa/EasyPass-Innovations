@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(schema = "LYMTT", name = "cliente")
-
+//teste1
 public class Cliente {
 
     @Id
