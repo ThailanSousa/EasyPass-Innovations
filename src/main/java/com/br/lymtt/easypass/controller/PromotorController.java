@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,5 +51,12 @@ public class PromotorController {
     public ResponseEntity<Void> deletarPromotor(@PathVariable Long id) {
         promotorService.deletarPromotor(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // Endpoint para atualizar um promotor por ID
+    @PutMapping("/{id}")
+    public ResponseEntity<Promotor> atualizarPromotor(@PathVariable Long id, @RequestBody Promotor promotorAtualizado) {
+        Promotor promotorExistente = promotorService.atualizarPromotor(id, promotorAtualizado);
+        return ResponseEntity.ok(promotorExistente);
     }
 }
