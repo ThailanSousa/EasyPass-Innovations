@@ -1,15 +1,22 @@
 package com.br.lymtt.easypass.controller;
 
-import com.br.lymtt.easypass.entity.Client;
-import com.br.lymtt.easypass.repository.ClientRepository;
-import com.br.lymtt.easypass.model.entities.Cliente;
-import com.br.lymtt.easypass.model.service.ClienteService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.br.lymtt.easypass.entity.Client;
+import com.br.lymtt.easypass.model.entities.Cliente;
+import com.br.lymtt.easypass.model.service.ClienteService;
+import com.br.lymtt.easypass.repository.ClientRepository;
 
 @RestController
 @RequestMapping("/clientes")
