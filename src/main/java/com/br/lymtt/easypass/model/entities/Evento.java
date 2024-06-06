@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
 @Entity
 @Table(schema = "LYMTT", name = "evento")
 
@@ -17,7 +16,6 @@ public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
     private LocalDate data;
     private String local;
@@ -26,7 +24,7 @@ public class Evento {
     public Evento() {
     }
 
-    public Evento(Long id ,LocalDate data, String local, LocalTime hora) {
+    public Evento(Long id, LocalDate data, String local, LocalTime hora) {
         this.id = id;
         this.data = data;
         this.local = local;
@@ -40,7 +38,7 @@ public class Evento {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public LocalDate getData() {
         return data;
     }
@@ -65,9 +63,8 @@ public class Evento {
         this.hora = hora;
     }
 
-
     @Override
     public String toString() {
-        return "Evento [ id= " + id + " data=" + data + ", local=" + local + ", hora=" + hora +" ]";
+        return "Evento [ id= " + id + " data=" + data + ", local=" + local + ", hora=" + hora + " ]";
     }
 }
