@@ -1,115 +1,54 @@
 package com.br.lymtt.easypass.controller;
 
-import com.br.lymtt.easypass.entity.Event;
-import com.br.lymtt.easypass.repository.EventRepository;
-import com.br.lymtt.easypass.model.entities.Evento;
-import com.br.lymtt.easypass.model.service.EventoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.br.lymtt.easypass.model.entities.Evento;
+import com.br.lymtt.easypass.model.service.EventoService;
+
 @RestController
-@RequestMapping("/eventos")
+@RequestMapping("/api/eventos")
 public class EventoController {
 
     @Autowired
     private EventoService eventoService;
 
-    @Autowired
-    private EventRepository eventRepository;
-
-    // Endpoints padrão para Evento usando EventoService
-
-    // CADASTRAR
-    @PostMapping
-    public ResponseEntity<Evento> cadastrar(@RequestBody Evento evento) {
-        Evento novoEvento = eventoService.cadastrar(evento);
-        return ResponseEntity.ok(novoEvento);
-    }
-
-    // LISTAR
+    // ENDPOINT PARA LISTAR TODOS OS EVENTOS
     @GetMapping
-    public ResponseEntity<List<Evento>> listar() {
-        List<Evento> eventos = eventoService.listar();
+    public ResponseEntity<List<Evento>> listarEventos() {
+        List<Evento> eventos = eventoService.listarEventos();
         return ResponseEntity.ok(eventos);
     }
 
+    // ENDPOINT PARA BUSCAR EVENTO POR ID
     @GetMapping("/{id}")
-    public ResponseEntity<Evento> listarPorId(@PathVariable Long id) {
-        return eventoService.listarPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Evento> buscarEventoPorId(@PathVariable Long id) {
+        Optional<Evento> evento = eventoService.buscarEventoPorId(id);
+        return evento.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    // ATUALIZAR
-    @PutMapping("/{id}")
-    public ResponseEntity<Evento> atualizar(@PathVariable Long id, @RequestBody Evento evento) {
-        Evento eventoAtualizado = eventoService.atualizar(id, evento);
-        if (eventoAtualizado != null) {
-            return ResponseEntity.ok(eventoAtualizado);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    // ENDPOINT PARA CADASTRAR UM NOVO EVENTO
+    @PostMapping
+    public ResponseEntity<Evento> cadastrarEvento(@RequestBody Evento evento) {
+        Evento novoEvento = eventoService.salvarEvento(evento);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoEvento);
     }
 
-    // DELETAR
+    // ENDPOINT PARA DELETAR UM EVENTO POR ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        if (eventoService.deletar(id)) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    // Endpoints legacy para Event usando EventRepository
-
-    @GetMapping("/legacy")
-    public List<Event> getAllEvents() {
-        return eventRepository.findAll();
-    }
-
-    @GetMapping("/legacy/{id}")
-    public ResponseEntity<Event> getEventById(@PathVariable Long id) {
-        Optional<Event> event = eventRepository.findById(id);
-        if (event.isPresent()) {
-            return ResponseEntity.ok(event.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PostMapping("/legacy")
-    public Event createEvent(@RequestBody Event event) {
-        return eventRepository.save(event);
-    }
-
-    @PutMapping("/legacy/{id}")
-    public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event eventDetails) {
-        Optional<Event> optionalEvent = eventRepository.findById(id);
-        if (optionalEvent.isPresent()) {
-            Event event = optionalEvent.get();
-            event.setNome(eventDetails.getNome());
-            event.setLocal(eventDetails.getLocal());
-            event.setData(eventDetails.getData());
-            Event updatedEvent = eventRepository.save(event);
-            return ResponseEntity.ok(updatedEvent);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @DeleteMapping("/legacy/{id}")
-    public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
-        Optional<Event> event = eventRepository.findById(id);
-        if (event.isPresent()) {
-            eventRepository.delete(event.get());
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Void> deletarEvento(@PathVariable Long id) {
+        eventoService.deletarEvento(id);
+        return ResponseEntity.noContent().build();
     }
 }

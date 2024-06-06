@@ -1,12 +1,14 @@
 package com.br.lymtt.easypass.model.service;
 
-import com.br.lymtt.easypass.model.entities.Evento;
-import com.br.lymtt.easypass.model.repository.EventoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.br.lymtt.easypass.model.entities.Evento;
+import com.br.lymtt.easypass.model.repository.EventoRepository;
 
 @Service
 public class EventoService {
@@ -14,41 +16,23 @@ public class EventoService {
     @Autowired
     private EventoRepository eventoRepository;
 
-    //CADASTRA
-    public Evento cadastrar(Evento evento) {
-        return eventoRepository.save(evento);
-    }
-
-    //LISTA
-    public List<Evento> listar() {
+    // LISTAR EVENTOS
+    public List<Evento> listarEventos() {
         return eventoRepository.findAll();
     }
 
-    public Optional<Evento> listarPorId(Long id) {
+    // BUSCAR EVENTO POR ID
+    public Optional<Evento> buscarEventoPorId(Long id) {
         return eventoRepository.findById(id);
     }
 
-    //ATUALIZA
-    public Evento atualizar(Long id, Evento updatedEvento) {
-        Optional<Evento> existingEvento = eventoRepository.findById(id);
-        if (existingEvento.isPresent()) {
-            Evento evento = existingEvento.get();
-            evento.setData(updatedEvento.getData());
-            evento.setLocal(updatedEvento.getLocal());
-            evento.setHora(updatedEvento.getHora());
-            return eventoRepository.save(evento);
-        } else {
-            return null; 
-        }
+    // CADASTRAR EVENTO
+    public Evento salvarEvento(Evento evento) {
+        return eventoRepository.save(evento);
     }
 
-    //DELETA
-    public boolean deletar(Long id) {
-        if (eventoRepository.existsById(id)) {
-            eventoRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
+    // DELETAR EVENTO
+    public void deletarEvento(Long id) {
+        eventoRepository.deleteById(id);
     }
 }

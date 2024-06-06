@@ -1,79 +1,54 @@
 package com.br.lymtt.easypass.controller;
 
-
-import com.br.lymtt.easypass.entity.Event;
-import com.br.lymtt.easypass.entity.Promoter;
-import com.br.lymtt.easypass.repository.EventRepository;
-import com.br.lymtt.easypass.repository.PromoterRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.br.lymtt.easypass.model.entities.Promotor;
+import com.br.lymtt.easypass.model.service.PromotorService;
+
 @RestController
-@RequestMapping("/promoters")
+@RequestMapping("/api/promotores")
 public class PromotorController {
 
     @Autowired
-    private PromoterRepository promoterRepository;
+    private PromotorService promotorService;
 
-    @Autowired
-    private EventRepository eventRepository;
-
+    // ENDPOINT PARA LISTAR TODOS OS PROMOTORES
     @GetMapping
-    public ResponseEntity<?> getAllPromoters() {
-        return ResponseEntity.ok(promoterRepository.findAll());
+    public ResponseEntity<List<Promotor>> listarPromotores() {
+        List<Promotor> promotores = promotorService.listarPromotores();
+        return ResponseEntity.ok(promotores);
     }
 
+    // ENDPOINT PARA BUSCAR PROMOTOR POR ID
     @GetMapping("/{id}")
-    public ResponseEntity<Promoter> getPromoterById(@PathVariable String id) {
-        Optional<Promoter> promoter = promoterRepository.findById(id);
-        return promoter.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<Promotor> buscarPromotorPorId(@PathVariable Long id) {
+        Optional<Promotor> promotor = promotorService.buscarPromotorPorId(id);
+        return promotor.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
+    // ENDPOINT PARA CADASTRAR UM NOVO PROMOTOR
     @PostMapping
-    public ResponseEntity<Promoter> createPromoter(@RequestBody Promoter promoter) {
-        return ResponseEntity.ok(promoterRepository.save(promoter));
+    public ResponseEntity<Promotor> cadastrarPromotor(@RequestBody Promotor promotor) {
+        Promotor novoPromotor = promotorService.salvarPromotor(promotor);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoPromotor);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Promoter> updatePromoter(@PathVariable String id, @RequestBody Promoter promoterDetails) {
-        Optional<Promoter> optionalPromoter = promoterRepository.findById(id);
-        if (optionalPromoter.isPresent()) {
-            Promoter promoter = optionalPromoter.get();
-            promoter.setNome(promoterDetails.getNome());
-            promoter.setIdade(promoterDetails.getIdade());
-            promoter.setEmail(promoterDetails.getEmail());
-            promoter.setCodigoPromotor(promoterDetails.getCodigoPromotor());
-            return ResponseEntity.ok(promoterRepository.save(promoter));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
+    // ENDPOINT PARA DELETAR UM PROMOTOR POR ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePromoter(@PathVariable String id) {
-        Optional<Promoter> promoter = promoterRepository.findById(id);
-        if (promoter.isPresent()) {
-            promoterRepository.delete(promoter.get());
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PostMapping("/{promoterId}/events")
-    public ResponseEntity<Event> createEvent(@PathVariable String promoterId, @RequestBody Event event) {
-        Optional<Promoter> optionalPromoter = promoterRepository.findById(promoterId);
-        if (optionalPromoter.isPresent()) {
-            Promoter promoter = optionalPromoter.get();
-            promoter.addEvent(event);
-            eventRepository.save(event);
-            return ResponseEntity.ok(event);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Void> deletarPromotor(@PathVariable Long id) {
+        promotorService.deletarPromotor(id);
+        return ResponseEntity.noContent().build();
     }
 }
