@@ -1,4 +1,5 @@
 package com.br.lymtt.easypass.model.entities;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -91,7 +92,8 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente [email=" + getEmail() + ", numeroTelefone=" + getNumeroTelefone() + ", id=" + getId() + ", nome="
+        return "Cliente [email=" + getEmail() + ", numeroTelefone=" + getNumeroTelefone() + ", id=" + getId()
+                + ", nome="
                 + getNome() + ", cpf=" + getCpf() + ", genero=" + getGenero() + ", idade=" + getIdade() + "]";
     }
 
