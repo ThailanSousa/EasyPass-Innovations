@@ -17,6 +17,7 @@ public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nomeEvento;
     private LocalDate data;
     private String local;
     private LocalTime hora;
@@ -24,20 +25,17 @@ public class Evento {
     public Evento() {
     }
 
-    public Evento(Long id, LocalDate data, String local, LocalTime hora) {
+    public Evento(Long id, LocalDate data, String local, LocalTime hora,String nomeEvento) {
         this.id = id;
         this.data = data;
         this.local = local;
         this.hora = hora;
+        this.nomeEvento = nomeEvento;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() {return id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) {this.id = id;}
 
     public LocalDate getData() {
         return data;
@@ -62,6 +60,10 @@ public class Evento {
     public void setHora(LocalTime hora) {
         this.hora = hora;
     }
+
+    public String getNomeEvento() {return nomeEvento; }
+
+    public void setNomeEvento(String nomeEvento) {this.nomeEvento = nomeEvento;}
 
     @Override
     public String toString() {
