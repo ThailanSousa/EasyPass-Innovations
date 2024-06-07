@@ -1,120 +1,129 @@
-Guia de Consumo da API RESTful do Sistema de Ingressos EasyPassInnovations
+# Guia de Consumo da API RESTful do Sistema de Ingressos EasyPassInnovations
+
 Este é um guia básico sobre como consumir a API RESTful do Sistema de Ingressos EasyPassInnovations. A API foi desenvolvida usando Spring Boot e oferece endpoints para gerenciar promotores, eventos, clientes e ingressos.
 
-Ferramentas Recomendadas
-Postman Collection
-Para testar e explorar os endpoints da API de Sistema de Ingressos, recomendamos o uso do Postman. Você pode encontrar uma coleção pré-configurada com todas as solicitações necessárias no arquivo EasyPassInnovations.postman_collection.json.
+## Ferramentas Recomendadas
 
-SQLTools e SQLTools PostgreSQL
+### Postman Collection
+Para testar e explorar os endpoints da API de Sistema de Ingressos, recomendamos o uso do Postman. Você pode encontrar uma coleção pré-configurada com todas as solicitações necessárias no arquivo `EasyPassInnovations.postman_collection.json`.
+
+### Extensões para Visual Studio Code
+
+#### Spring Boot Extension Pack
+Esta extensão reúne várias outras extensões úteis para o desenvolvimento de aplicativos Spring Boot no VS Code.
+
+#### SQLTools e SQLTools PostgreSQL
 Se você está trabalhando com um banco de dados PostgreSQL, recomendamos as seguintes extensões:
-SQLTools: Interface para executar consultas SQL diretamente no editor de código. Suporta várias bases de dados, incluindo PostgreSQL.
-SQLTools PostgreSQL: Extensão complementar para SQLTools, permitindo conectar-se a bancos de dados PostgreSQL.
 
-Endpoints Disponíveis
-Promotores
-Listar todos os promotores
+- **SQLTools**: Interface para executar consultas SQL diretamente no editor de código. Suporta várias bases de dados, incluindo PostgreSQL.
+- **SQLTools PostgreSQL**: Extensão complementar para SQLTools, permitindo conectar-se a bancos de dados PostgreSQL.
 
-Método: GET
-Endpoint: /api/promotores
-Buscar um promotor pelo ID
+## Endpoints Disponíveis
 
-Método: GET
-Endpoint: /api/promotores/{id}
-Parâmetros de Path: {id} (ID do promotor)
-Adicionar um novo promotor
+### Promotores
 
-Método: POST
-Endpoint: /api/promotores
-Corpo da solicitação: JSON contendo os detalhes do promotor
-Atualizar um promotor existente
+- **Listar todos os promotores**
+  - Método: `GET`
+  - Endpoint: `/api/promotores`
 
-Método: PUT
-Endpoint: /api/promotores/{id}
-Parâmetros de Path: {id} (ID do promotor a ser atualizado)
-Corpo da solicitação: JSON contendo os novos detalhes do promotor
-Deletar um promotor
+- **Buscar um promotor pelo ID**
+  - Método: `GET`
+  - Endpoint: `/api/promotores/{id}`
+  - Parâmetros de Path: `{id}` (ID do promotor)
 
-Método: DELETE
-Endpoint: /api/promotores/{id}
-Parâmetros de Path: {id} (ID do promotor a ser deletado)
+- **Adicionar um novo promotor**
+  - Método: `POST`
+  - Endpoint: `/api/promotores`
+  - Corpo da solicitação: JSON contendo os detalhes do promotor
 
-Eventos
-Listar todos os eventos
+- **Atualizar um promotor existente**
+  - Método: `PUT`
+  - Endpoint: `/api/promotores/{id}`
+  - Parâmetros de Path: `{id}` (ID do promotor a ser atualizado)
+  - Corpo da solicitação: JSON contendo os novos detalhes do promotor
 
-Método: GET
-Endpoint: /api/eventos
-Buscar um evento pelo ID
+- **Deletar um promotor**
+  - Método: `DELETE`
+  - Endpoint: `/api/promotores/{id}`
+  - Parâmetros de Path: `{id}` (ID do promotor a ser deletado)
 
-Método: GET
-Endpoint: /api/eventos/{id}
-Parâmetros de Path: {id} (ID do evento)
-Adicionar um novo evento
+### Eventos
 
-Método: POST
-Endpoint: /api/eventos
-Corpo da solicitação: JSON contendo os detalhes do evento
-Atualizar um evento existente
+- **Listar todos os eventos**
+  - Método: `GET`
+  - Endpoint: `/api/eventos`
 
-Método: PUT
-Endpoint: /api/eventos/{id}
-Parâmetros de Path: {id} (ID do evento a ser atualizado)
-Corpo da solicitação: JSON contendo os novos detalhes do evento
-Deletar um evento
+- **Buscar um evento pelo ID**
+  - Método: `GET`
+  - Endpoint: `/api/eventos/{id}`
+  - Parâmetros de Path: `{id}` (ID do evento)
 
-Método: DELETE
-Endpoint: /api/eventos/{id}
-Parâmetros de Path: {id} (ID do evento a ser deletado)
+- **Adicionar um novo evento**
+  - Método: `POST`
+  - Endpoint: `/api/eventos`
+  - Corpo da solicitação: JSON contendo os detalhes do evento
 
-Clientes
-Listar todos os clientes
+- **Atualizar um evento existente**
+  - Método: `PUT`
+  - Endpoint: `/api/eventos/{id}`
+  - Parâmetros de Path: `{id}` (ID do evento a ser atualizado)
+  - Corpo da solicitação: JSON contendo os novos detalhes do evento
 
-Método: GET
-Endpoint: /api/clientes
-Buscar um cliente pelo ID
+- **Deletar um evento**
+  - Método: `DELETE`
+  - Endpoint: `/api/eventos/{id}`
+  - Parâmetros de Path: `{id}` (ID do evento a ser deletado)
 
-Método: GET
-Endpoint: /api/clientes/{id}
-Parâmetros de Path: {id} (ID do cliente)
-Adicionar um novo cliente
+### Clientes
 
-Método: POST
-Endpoint: /api/clientes
-Corpo da solicitação: JSON contendo os detalhes do cliente
-Atualizar um cliente existente
+- **Listar todos os clientes**
+  - Método: `GET`
+  - Endpoint: `/api/clientes`
 
-Método: PUT
-Endpoint: /api/clientes/{id}
-Parâmetros de Path: {id} (ID do cliente a ser atualizado)
-Corpo da solicitação: JSON contendo os novos detalhes do cliente
-Deletar um cliente
+- **Buscar um cliente pelo ID**
+  - Método: `GET`
+  - Endpoint: `/api/clientes/{id}`
+  - Parâmetros de Path: `{id}` (ID do cliente)
 
-Método: DELETE
-Endpoint: /api/clientes/{id}
-Parâmetros de Path: {id} (ID do cliente a ser deletado)
+- **Adicionar um novo cliente**
+  - Método: `POST`
+  - Endpoint: `/api/clientes`
+  - Corpo da solicitação: JSON contendo os detalhes do cliente
 
-Ingressos
-Listar todos os ingressos
+- **Atualizar um cliente existente**
+  - Método: `PUT`
+  - Endpoint: `/api/clientes/{id}`
+  - Parâmetros de Path: `{id}` (ID do cliente a ser atualizado)
+  - Corpo da solicitação: JSON contendo os novos detalhes do cliente
 
-Método: GET
-Endpoint: /api/ingressos
-Buscar um ingresso pelo ID
+- **Deletar um cliente**
+  - Método: `DELETE`
+  - Endpoint: `/api/clientes/{id}`
+  - Parâmetros de Path: `{id}` (ID do cliente a ser deletado)
 
-Método: GET
-Endpoint: /api/ingressos/{id}
-Parâmetros de Path: {id} (ID do ingresso)
-Adicionar um novo ingresso
+### Ingressos
 
-Método: POST
-Endpoint: /api/ingressos
-Corpo da solicitação: JSON contendo os detalhes do ingresso
-Atualizar um ingresso existente
+- **Listar todos os ingressos**
+  - Método: `GET`
+  - Endpoint: `/api/ingressos`
 
-Método: PUT
-Endpoint: /api/ingressos/{id}
-Parâmetros de Path: {id} (ID do ingresso a ser atualizado)
-Corpo da solicitação: JSON contendo os novos detalhes do ingresso
-Deletar um ingresso
+- **Buscar um ingresso pelo ID**
+  - Método: `GET`
+  - Endpoint: `/api/ingressos/{id}`
+  - Parâmetros de Path: `{id}` (ID do ingresso)
 
-Método: DELETE
-Endpoint: /api/ingressos/{id}
-Parâmetros de Path: {id} (ID do ingresso a ser deletado)
+- **Adicionar um novo ingresso**
+  - Método: `POST`
+  - Endpoint: `/api/ingressos`
+  - Corpo da solicitação: JSON contendo os detalhes do ingresso
+
+- **Atualizar um ingresso existente**
+  - Método: `PUT`
+  - Endpoint: `/api/ingressos/{id}`
+  - Parâmetros de Path: `{id}` (ID do ingresso a ser atualizado)
+  - Corpo da solicitação: JSON contendo os novos detalhes do ingresso
+
+- **Deletar um ingresso**
+  - Método: `DELETE`
+  - Endpoint: `/api/ingressos/{id}`
+  - Parâmetros de Path: `{id}` (ID do ingresso a ser deletado)
