@@ -48,6 +48,7 @@ public class PromotorService {
             promotorExistente.setGenero(promotorAtualizado.getGenero());
             promotorExistente.setIdade(promotorAtualizado.getIdade());
             promotorExistente.setEmpresa(promotorAtualizado.getEmpresa());
+            promotorExistente.setEvento(promotorAtualizado.getEvento());
             return promotorRepository.save(promotorExistente);
         } else {
             throw new ResourceNotFoundException("Promotor com ID " + id + " não encontrado.");
