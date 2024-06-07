@@ -151,7 +151,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"Nome do Promotor\",\r\n    \"cpf\": \"123.456.789-00\",\r\n    \"genero\": \"masculino\",\r\n    \"idade\": 30,\r\n    \"empresa\": \"Nome da Empresa\"\r\n}\r\n",
+					"raw": "{\r\n    \"nome\": \"Nome do Promotor\",\r\n    \"cpf\": \"123.456.789-00\",\r\n    \"genero\": \"masculino\",\r\n    \"idade\": 30,\r\n    \"empresa\": \"Nome da Empresa\",\r\n    \"evento\": {\r\n        \"id\": 1 // id do evento \r\n    }\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -269,7 +269,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        //na URL da requisição, mude o número para qual o id do promotor que deseja atualizar\r\n\r\n        \"nome\": \"Novo nome\",\r\n        \"cpf\": \"00000000000\",\r\n        \"genero\": \"Masculino/Feminino\",\r\n        \"idade\": 30,\r\n        \"empresa\": \"Novo nome da empresa/evento\"\r\n    }",
+					"raw": "{\r\n        //na URL da requisição, mude o número para qual o id do promotor que deseja atualizar\r\n\r\n        \"nome\": \"Samantha\",\r\n        \"cpf\": \"12345678999\",\r\n        \"genero\": \"Feminino\",\r\n        \"idade\": 25,\r\n        \"empresa\": \"Forró Sertão\",\r\n       \"evento\": {\r\n        \"id\": 2 // id do evento \r\n    }\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -277,7 +277,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/promotores/1",
+					"raw": "http://localhost:8080/api/promotores/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -286,7 +286,7 @@
 					"path": [
 						"api",
 						"promotores",
-						"1"
+						"2"
 					]
 				}
 			},

@@ -1,9 +1,13 @@
 package com.br.lymtt.easypass.model.entities;
 
+import com.br.lymtt.easypass.model.entities.Evento;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,8 +17,12 @@ public class Promotor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_evento", referencedColumnName = "id")
+    private Evento evento;
+    
     private String nome;
     private String cpf;
     private String genero; // masculino ou feminino
@@ -24,13 +32,14 @@ public class Promotor {
     public Promotor() {
     }
 
-    public Promotor(Long id, String nome, String cpf, String genero, int idade, String empresa) {
+    public Promotor(Long id, String nome, String cpf, String genero, int idade, String empresa, Evento evento) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.genero = genero;
         this.idade = idade;
         this.empresa = empresa;
+        this.evento = evento;
     }
 
     public Long getId() {
@@ -81,9 +90,18 @@ public class Promotor {
         return empresa;
     }
 
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+
     @Override
     public String toString() {
         return "Promotor [ id=" + getId() + ", nome=" + getNome() + ", cpf=" + getCpf() + ", empresa=" + getEmpresa()
                 + ", genero=" + getGenero() + ", idade=" + getIdade() + "]";
     }
+
 }
