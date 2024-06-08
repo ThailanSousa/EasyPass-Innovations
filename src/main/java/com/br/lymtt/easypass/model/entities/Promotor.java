@@ -1,6 +1,5 @@
 package com.br.lymtt.easypass.model.entities;
 
-import com.br.lymtt.easypass.model.entities.Evento;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
